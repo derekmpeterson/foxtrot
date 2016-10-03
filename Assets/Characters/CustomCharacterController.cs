@@ -8,6 +8,10 @@ public class CustomCharacterController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
 
+
+	public delegate void ActionAttackEvent(GameObject i_object);
+	public static event ActionAttackEvent DoActionAttackEvent;
+
 	// Use this for initialization
 	void Start () {
 		m_rigidbody = GetComponent<Rigidbody> ();
@@ -32,5 +36,11 @@ public class CustomCharacterController : MonoBehaviour {
 	public void Look(Vector3 i_direction) {
 		Quaternion pTargetRotation = Quaternion.LookRotation (i_direction);
 		transform.rotation = Quaternion.Slerp (transform.rotation, pTargetRotation, Mathf.PI * 4.0f * Time.deltaTime);
+	}
+
+	public static void TriggerActionAttackEvent(GameObject i_object) {
+		if (DoActionAttackEvent != null) {
+			DoActionAttackEvent(i_object);
+		}
 	}
 }

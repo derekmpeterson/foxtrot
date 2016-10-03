@@ -12,6 +12,14 @@ public class GunController : MonoBehaviour {
 	void Start () {
 		
 	}
+
+	void OnEnable () {
+		CustomCharacterController.DoActionAttackEvent += OnActionAttackEvent;
+	}
+
+	void OnDisable () {
+		CustomCharacterController.DoActionAttackEvent -= OnActionAttackEvent;
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,6 +32,12 @@ public class GunController : MonoBehaviour {
 			MunitionController.CreateMunition (m_bullet, gameObject, pGun);
 
 			m_fireTick = m_fireRate;
+		}
+	}
+
+	public void OnActionAttackEvent (GameObject i_object) {
+		if (i_object == gameObject) {
+			Fire ();
 		}
 	}
 }

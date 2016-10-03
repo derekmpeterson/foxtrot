@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown(0)) {
-			m_gunController.Fire ();
+			CustomCharacterController.TriggerActionAttackEvent (gameObject);
 		}
 	}
 

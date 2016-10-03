@@ -100,9 +100,7 @@ public class PerceptionController : MonoBehaviour {
 
 	public void OnDamageEvent(GameObject i_victim, GameObject i_attacker, float i_damage) {
 		if (i_victim == gameObject) {
-			if (LineOfSight (i_attacker)) {
-				SetTarget (i_attacker);
-			}
+			SetTarget (i_attacker);
 		}
 	}
 }
