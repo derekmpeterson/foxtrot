@@ -4,10 +4,12 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	CustomCharacterController m_characterController;
+	GunController m_gunController;
 
 	// Use this for initialization
 	void Start () {
 		m_characterController = GetComponent<CustomCharacterController> ();
+		m_gunController = GetComponent<GunController> ();
 	}
 
 	// Update is called once per frame
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour {
 
 		if (pDirection.sqrMagnitude > 0.0f) {
 			m_characterController.Move (pDirection.normalized, pDirection.magnitude);
+		}
+
+		if (Input.GetKey (KeyCode.Space)) {
+			m_gunController.Fire ();
 		}
 	}
 

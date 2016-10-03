@@ -85,12 +85,6 @@ public class PerceptionController : MonoBehaviour {
 			Collider pCollider = pColliders [i];
 			if ((i_findTypes.value & 1 << pCollider.gameObject.layer) != 0) {
 				pMatches.Add (pCollider.gameObject);
-//				// we found a match
-//				float pDistanceSquared = (pCollider.transform.position - transform.position).sqrMagnitude;
-//				if (pDistanceSquared < pNearestDistanceSquared) {
-//					pNearest = pCollider.gameObject;
-//					pNearestDistanceSquared = pDistanceSquared;
-//				}
 			}
 		}
 		return pMatches;
