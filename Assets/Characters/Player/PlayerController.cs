@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 			m_characterController.Move (pDirection.normalized, pDirection.magnitude);
 		}
 
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetMouseButtonDown(0)) {
 			m_gunController.Fire ();
 		}
 	}

@@ -7,7 +7,7 @@ public class PerceptionController : MonoBehaviour {
 	const float c_targetingTickRate = 0.1f;
 
 	public float m_fov = 45.0f;
-	public float m_sightDistance = 4.0f;
+	public float m_sightDistance = 6.0f;
 	public LayerMask m_targetTypes;
 	GameObject m_target;
 
@@ -17,6 +17,14 @@ public class PerceptionController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+	}
+
+	void OnEnable () {
+		HealthController.DoDamageEvent += OnDamageEvent;
+	}
+
+	void OnDisable () {
+		HealthController.DoDamageEvent -= OnDamageEvent;
 	}
 	
 	// Update is called once per frame
@@ -55,7 +63,7 @@ public class PerceptionController : MonoBehaviour {
 		Vector3 pTargetDirection = i_object.transform.position - transform.position;
 		float pTargetDistanceSquared = pTargetDirection.sqrMagnitude;
 		pTargetDirection.Normalize ();
-		if (pTargetDistanceSquared <= Mathf.Pow(m_sightDistance, 2) || Vector3.Angle (pTargetDirection, transform.forward) <= m_fov) {
+		if (pTargetDistanceSquared <= Mathf.Pow(m_sightDistance, 2)/* || Vector3.Angle (pTargetDirection, transform.forward) <= m_fov*/) {
 			RaycastHit pHit;
 			Physics.Raycast (transform.position + Vector3.up * 0.5f, pTargetDirection, out pHit, 5.0f);
 			if (pHit.collider && pHit.collider.gameObject == i_object) {
@@ -88,5 +96,13 @@ public class PerceptionController : MonoBehaviour {
 			}
 		}
 		return pMatches;
+	}
+
+	public void OnDamageEvent(GameObject i_victim, GameObject i_attacker, float i_damage) {
+		if (i_victim == gameObject) {
+			if (LineOfSight (i_attacker)) {
+				SetTarget (i_attacker);
+			}
+		}
 	}
 }
