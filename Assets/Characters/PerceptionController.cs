@@ -14,6 +14,11 @@ public class PerceptionController : MonoBehaviour {
 	private float m_targetingTick = 0.0f;
 
 
+
+	public delegate void TargetChangedEvent(GameObject i_gameObject, GameObject i_target);
+	public static event TargetChangedEvent DoTargetChangedEvent;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -83,6 +88,11 @@ public class PerceptionController : MonoBehaviour {
 	}
 
 	public void SetTarget (GameObject i_target) {
+		if (i_target != m_target) {
+			if (DoTargetChangedEvent != null) {
+				DoTargetChangedEvent (gameObject, i_target);
+			}
+		}
 		m_target = i_target;
 	}
 
