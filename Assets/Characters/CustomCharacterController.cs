@@ -8,9 +8,7 @@ public class CustomCharacterController : MonoBehaviour {
 
 	private Rigidbody m_rigidbody;
 
-
-	public delegate void ActionAttackEvent(GameObject i_object);
-	public static event ActionAttackEvent DoActionAttackEvent;
+	public static EventSystem.SimpleGameEvent ActionAttackEvent = new EventSystem.SimpleGameEvent();
 
 	// Use this for initialization
 	void Start () {
@@ -39,8 +37,6 @@ public class CustomCharacterController : MonoBehaviour {
 	}
 
 	public static void TriggerActionAttackEvent(GameObject i_object) {
-		if (DoActionAttackEvent != null) {
-			DoActionAttackEvent(i_object);
-		}
+		ActionAttackEvent.Invoke (i_object);
 	}
 }

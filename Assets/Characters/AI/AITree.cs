@@ -40,3 +40,14 @@ public class AITree : MonoBehaviour {
 		m_currentState = null;
 	}
 }
+//
+//[
+//	"IdleState": {
+//		"Enter": [],
+//		"Events": [
+//			{
+//				"Event":
+//		],
+//		"Exit": []
+//	}
+//]

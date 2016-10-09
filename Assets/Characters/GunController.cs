@@ -14,11 +14,11 @@ public class GunController : MonoBehaviour {
 	}
 
 	void OnEnable () {
-		CustomCharacterController.DoActionAttackEvent += OnActionAttackEvent;
+		CustomCharacterController.ActionAttackEvent.AddListener (OnActionAttackEvent);
 	}
 
 	void OnDisable () {
-		CustomCharacterController.DoActionAttackEvent -= OnActionAttackEvent;
+		CustomCharacterController.ActionAttackEvent.RemoveListener (OnActionAttackEvent);
 	}
 	
 	// Update is called once per frame

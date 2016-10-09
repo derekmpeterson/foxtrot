@@ -24,30 +24,30 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GameObject pTarget = m_perceptionController.GetTarget ();
-		if (pTarget && m_pathTick <= 0.0f) {// && m_characterController.CanSeeTarget()) {
-			m_pathTick = c_pathTickRate;
-			m_seeker.StartPath (transform.position, pTarget.transform.position, OnPathComplete);
-		} else if (!pTarget) {
-			m_currentPath = null;
-			m_currentWaypoint = 0;
-		}
-
-		m_pathTick -= Time.deltaTime;
-
-		if (m_currentPath != null) {
-			if (m_currentWaypoint < m_currentPath.vectorPath.Count) {
-				Vector3 pDir = (m_currentPath.vectorPath [m_currentWaypoint] - transform.position).normalized;
-				if (pDir.sqrMagnitude > 0.0f) {
-					m_characterController.Look (pDir);
-					m_characterController.Move (pDir);
-				}
-
-				if (Vector3.Distance (transform.position, m_currentPath.vectorPath [m_currentWaypoint]) < c_waypointDistanceAllowance) {
-					m_currentWaypoint++;
-				}
-			}
-		}
+//		GameObject pTarget = m_perceptionController.GetTarget ();
+//		if (pTarget && m_pathTick <= 0.0f) {// && m_characterController.CanSeeTarget()) {
+//			m_pathTick = c_pathTickRate;
+//			m_seeker.StartPath (transform.position, pTarget.transform.position, OnPathComplete);
+//		} else if (!pTarget) {
+//			m_currentPath = null;
+//			m_currentWaypoint = 0;
+//		}
+//
+//		m_pathTick -= Time.deltaTime;
+//
+//		if (m_currentPath != null) {
+//			if (m_currentWaypoint < m_currentPath.vectorPath.Count) {
+//				Vector3 pDir = (m_currentPath.vectorPath [m_currentWaypoint] - transform.position).normalized;
+//				if (pDir.sqrMagnitude > 0.0f) {
+//					m_characterController.Look (pDir);
+//					m_characterController.Move (pDir);
+//				}
+//
+//				if (Vector3.Distance (transform.position, m_currentPath.vectorPath [m_currentWaypoint]) < c_waypointDistanceAllowance) {
+//					m_currentWaypoint++;
+//				}
+//			}
+//		}
 	}
 
 	public void OnPathComplete (Path i_path) {

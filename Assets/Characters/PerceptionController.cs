@@ -14,9 +14,10 @@ public class PerceptionController : MonoBehaviour {
 	private float m_targetingTick = 0.0f;
 
 
-
-	public delegate void TargetChangedEvent(GameObject i_gameObject, GameObject i_target);
-	public static event TargetChangedEvent DoTargetChangedEvent;
+	public static EventSystem.GameEvent TargetChangedEvent = new EventSystem.GameEvent ();
+	public struct TargetChangedData : EventSystem.EventData {
+		public GameObject m_target;
+	};
 
 
 	// Use this for initialization
@@ -89,9 +90,9 @@ public class PerceptionController : MonoBehaviour {
 
 	public void SetTarget (GameObject i_target) {
 		if (i_target != m_target) {
-			if (DoTargetChangedEvent != null) {
-				DoTargetChangedEvent (gameObject, i_target);
-			}
+			TargetChangedData pData;
+			pData.m_target = i_target;
+			TargetChangedEvent.Invoke (gameObject, pData);
 		}
 		m_target = i_target;
 	}
